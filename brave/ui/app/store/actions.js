@@ -17,6 +17,8 @@ function setBackgroundConnection (newConnection) {
 }
 
 MetaMaskActions._setBackgroundConnection = setBackgroundConnection
+MetaMaskActions.resetMetaMaskState = resetMetaMaskState
+MetaMaskActions.resetAppState = resetAppState
 
 function setBatTokenAdded () {
   return (dispatch) => {
@@ -61,6 +63,26 @@ function addToken (address, symbol, decimals, image) {
         dispatch(MetaMaskActions.updateTokens(tokens))
         resolve(tokens)
       })
+    })
+  }
+}
+
+function resetMetaMaskState () {
+  return (dispatch) => {
+    background.resetMetaMaskState((err) => {
+      if (err) {
+        return dispatch(MetaMaskActions.displayWarning(err.message))
+      }
+    })
+  }
+}
+
+function resetAppState () {
+  return (dispatch) => {
+    background.resetAppState((err) => {
+      if (err) {
+        return dispatch(MetaMaskActions.displayWarning(err.message))
+      }
     })
   }
 }

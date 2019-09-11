@@ -19,4 +19,9 @@ module.exports = class BravePreferencesController extends PreferencesController 
     this.store.updateState({ rewardsDisclosureAccepted: true })
     return Promise.resolve(true)
   }
+
+  resetMetaMaskState () {
+    this.store.updateState({})
+    return Promise.resolve(true)
+  }
 }
