@@ -186,8 +186,8 @@ const createBraveReplacePathsTask = () => {
       )
       .pipe(
         replace(
-          /'(.*)\/advanced-tab\.component'/gm,
-          `'${bravePrefix}ui/app/pages/settings/advanced-tab/advanced-tab.component'`
+          /'(.*)\/advanced-tab'/gm,
+          `'${bravePrefix}ui/app/pages/settings/advanced-tab'`
         )
       )
       .pipe(
