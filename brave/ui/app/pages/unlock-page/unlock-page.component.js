@@ -12,6 +12,7 @@ module.exports = class BraveUnlockPage extends UnlockPage {
       canReset: false,
       isResetting: false,
       confirmationPhrase: '',
+      shouldReset: false,
     }
   }
 
@@ -25,6 +26,12 @@ module.exports = class BraveUnlockPage extends UnlockPage {
     if (isInitialized && !completedOnboarding) {
       setCompletedOnboarding()
     }
+
+    window.addEventListener('beforeunload', (e) => {
+      if (this.state.shouldReset) {
+        chrome.braveWallet.resetWallet()
+      }
+    })
   }
 
   onResetPrompt = () => {
@@ -34,7 +41,10 @@ module.exports = class BraveUnlockPage extends UnlockPage {
   handleReset = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    chrome.braveWallet.resetWallet()
+    this.setState({ shouldReset: true })
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.remove(tab.id, () => {})
+    })
   }
 
   cancelReset = () => {
