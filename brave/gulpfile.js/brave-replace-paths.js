@@ -249,6 +249,18 @@ const createBraveReplacePathsTask = () => {
           `'${bravePrefix}ui/app/pages/unlock-page/unlock-page.container'`
         )
       )
+      .pipe(
+        replace(
+          /'eth-block-tracker'/gm,
+          `'${bravePrefix}lib/eth-block-tracker'`
+        )
+      )
+      .pipe(
+        replace(
+          /'eth-token-tracker'/gm,
+          `'${bravePrefix}lib/eth-token-tracker'`
+        )
+      )
       .pipe(gulp.dest(file => file.base))
   })
 }
