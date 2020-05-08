@@ -261,6 +261,12 @@ const createBraveReplacePathsTask = () => {
           `'${bravePrefix}lib/eth-token-tracker'`
         )
       )
+      .pipe(
+        replace(
+          /'(.*)\/recent-blocks'/gm,
+          `'${bravePrefix}app/scripts/controllers/recent-blocks'`
+        )
+      )
       .pipe(gulp.dest(file => file.base))
   })
 }
